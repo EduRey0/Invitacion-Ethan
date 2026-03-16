@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mi Bautizo y 3 Años - Ethan</title>
+  <style>
+    :root {
+      --bg1: #fef4fb;
+      --bg2: #eef7ff;
+      --card: rgba(255,255,255,0.8);
+      --gold: #c89b2b;
+      --gold-dark: #9f7412;
+      --blue: #bfe4ff;
+      --blue-strong: #88c8ff;
+      --pink: #ffd8ea;
+      --pink-strong: #ffb8d7;
+      --lavender: #efe2ff;
+      --text: #5f4a1b;
+      --shadow: 0 12px 40px rgba(146, 135, 185, 0.2);
+      --radius: 26px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Georgia", "Times New Roman", serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,0.96), transparent 28%),
+        radial-gradient(circle at 85% 15%, rgba(255,216,234,0.45), transparent 22%),
+        radial-gradient(circle at bottom right, rgba(191,228,255,0.38), transparent 24%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      overflow-x: hidden;
+      position: relative;
+      cursor: none;
+    }
+
+    .cursor,
+    .cursor-ring {
+      position: fixed;
+      left: 0;
+      top: 0;
+      pointer-events: none;
+      z-index: 9999;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      mix-blend-mode: multiply;
+    }
+
+    .cursor {
+      width: 10px;
+      height: 10px;
+      background: radial-gradient(circle, #ffd970 0%, #c89b2b 80%);
+      box-shadow: 0 0 18px rgba(200, 155, 43, 0.8);
+    }
+
+    .cursor-ring {
+      width: 34px;
+      height: 34px;
+      border: 1.5px solid rgba(136, 200, 255, 0.95);
+      background: rgba(191, 228, 255, 0.15);
+      transition: width 0.18s ease, height 0.18s ease, transform 0.12s ease;
+      backdrop-filter: blur(2px);
+    }
+
+    .cursor-grow {
+      width: 56px !important;
+      height: 56px !important;
+    }
+
+    .sparkle {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      background: radial-gradient(circle, rgba(255,255,255,.95) 0%, rgba(200,155,43,.8) 45%, rgba(191,228,255,0) 75%);
+      animation: fadeSpark 700ms ease-out forwards;
+    }
+
+    @keyframes fadeSpark {
+      from { opacity: 1; transform: scale(1); }
+      to { opacity: 0; transform: scale(2.5) translateY(-10px); }
+    }
+
+    .bg-cloud,
+    .bg-orb {
+      position: fixed;
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(10px);
+      opacity: 0.55;
+    }
+
+    .bg-cloud {
+      width: 260px;
+      height: 260px;
+      background: radial-gradient(circle, rgba(255,216,234,0.5), rgba(191,228,255,0.18), rgba(191,228,255,0));
+      animation: drift 18s ease-in-out infinite alternate;
+    }
+
+    .cloud1 { top: 30px; left: -40px; }
+    .cloud2 { top: 35%; right: -60px; animation-duration: 22s; }
+    .cloud3 { bottom: 8%; left: 10%; animation-duration: 20s; }
+
+    .bg-orb {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.95), rgba(255,216,234,0.18), rgba(255,255,255,0));
+      animation: pulse 7s ease-in-out infinite;
+    }
+
+    .orb1 { top: 18%; left: 72%; }
+    .orb2 { bottom: 18%; right: 70%; animation-delay: 1.8s; }
+
+    @keyframes drift {
+      from { transform: translateY(0) translateX(0) scale(1); }
+      to { transform: translateY(25px) translateX(25px) scale(1.12); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.35; }
+      50% { transform: scale(1.18); opacity: 0.65; }
+    }
+
+    .container {
+      width: min(1100px, calc(100% - 28px));
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+      padding: 24px 0 60px;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 22px 0 40px;
+      position: relative;
+    }
+
+    .hero-card {
+      width: 100%;
+      max-width: 920px;
+      background: linear-gradient(180deg, rgba(255,255,255,.85), rgba(255,255,255,.7));
+      border: 1px solid rgba(255,255,255,0.7);
+      box-shadow: var(--shadow);
+      border-radius: 34px;
+      padding: 28px 22px 26px;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+      animation: rise 1s ease both;
+    }
+
+    .hero-card::before,
+    .hero-card::after,
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: auto;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(191,228,255,0.35), transparent 70%);
+      filter: blur(4px);
+      z-index: 0;
+    }
+
+    .hero-card::before { top: -55px; left: -55px; }
+    .hero-card::after { right: -60px; bottom: -80px; }
+
+    .hero-inner,
+    .card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(30px) scale(.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .ribbon {
+      display: inline-block;
+      padding: 10px 18px;
+      margin-bottom: 14px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #f5dc98, #d8aa35, #f6e1a4);
+      color: #5c4310;
+      font-weight: 700;
+      letter-spacing: .6px;
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      box-shadow: 0 8px 18px rgba(200, 155, 43, 0.28);
+      animation: softFloat 4s ease-in-out infinite;
+    }
+
+    .title {
+      margin: 0;
+      font-size: clamp(2.6rem, 9vw, 5.8rem);
+      line-height: .95;
+      letter-spacing: 1px;
+      background: linear-gradient(180deg, #fff1b0 0%, #d2a334 45%, #9d7315 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 3px 0 rgba(255,255,255,.35), 0 14px 22px rgba(200,155,43,.18);
+      animation: glowTitle 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes glowTitle {
+      from { filter: drop-shadow(0 0 0 rgba(200,155,43,.18)); }
+      to { filter: drop-shadow(0 0 12px rgba(200,155,43,.25)); }
+    }
+
+    .subtitle {
+      margin: 16px auto 10px;
+      max-width: 700px;
+      font-size: clamp(1rem, 2.3vw, 1.22rem);
+      line-height: 1.7;
+      color: #7b6122;
+    }
+
+    .angel {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      display: inline-block;
+      animation: softFloat 3.8s ease-in-out infinite;
+      transform-origin: center;
+      margin: 12px 0 8px;
+      user-select: none;
+    }
+
+    @keyframes softFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .quick-info {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .pill {
+      padding: 16px 14px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(186, 220, 247, 0.7);
+      box-shadow: 0 10px 24px rgba(117, 153, 182, 0.12);
+      transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+    }
+
+    .pill:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 30px rgba(117, 153, 182, 0.17);
+      background: rgba(255,255,255,0.88);
+    }
+
+    .pill .label {
+      display: block;
+      font-size: .92rem;
+      color: #8b7440;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+    }
+
+    .pill strong {
+      font-size: clamp(1rem, 2vw, 1.15rem);
+    }
+
+    section {
+      padding: 18px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin: 12px 0 20px;
+      color: var(--gold-dark);
+      text-shadow: 0 2px 0 rgba(255,255,255,.35);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.75);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px 20px;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+      transition: transform .35s ease, box-shadow .35s ease;
+      opacity: 0;
+      transform: translateY(35px);
+    }
+
+    .card.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .card:hover {
+      transform: translateY(-8px) rotate(-.3deg);
+      box-shadow: 0 18px 36px rgba(108, 146, 177, 0.22);
+    }
+
+    .card::before {
+      right: -70px;
+      top: -70px;
+    }
+
+    .card h3 {
+      margin: 0 0 14px;
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      color: var(--gold-dark);
+    }
+
+    .card p,
+    .card li {
+      margin: 0;
+      line-height: 1.8;
+      font-size: 1.06rem;
+    }
+
+    .names {
+      display: grid;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .name-tag {
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.8);
+      border: 1px solid rgba(191,228,255,.7);
+      font-size: clamp(1.1rem, 2.4vw, 1.4rem);
+      font-weight: 700;
+      color: #a0710f;
+      transition: transform .2s ease, background .2s ease;
+    }
+
+    .name-tag:hover {
+      transform: scale(1.02);
+      background: rgba(255,255,255,0.96);
+    }
+
+    .countdown-wrap {
+      margin-top: 22px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.72));
+      border-radius: 26px;
+      padding: 22px 18px;
+      border: 1px solid rgba(255,255,255,0.75);
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .countdown-title {
+      margin: 0 0 14px;
+      color: var(--gold-dark);
+      font-size: clamp(1.5rem, 4vw, 2rem);
+    }
+
+    .countdown-note {
+      margin-top: 14px;
+      font-size: .95rem;
+      color: #8b7440;
+    }
+
+    .countdown {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .time-box {
+      padding: 16px 10px;
+      background: rgba(255,255,255,0.82);
+      border-radius: 20px;
+      border: 1px solid rgba(186,220,247,.75);
+      box-shadow: 0 10px 22px rgba(117, 153, 182, 0.11);
+    }
+
+    .time-box span {
+      display: block;
+    }
+
+    .time-box .num {
+      font-size: clamp(1.7rem, 4vw, 2.6rem);
+      font-weight: 700;
+      color: #9a6f14;
+    }
+
+    .time-box .txt {
+      font-size: .95rem;
+      color: #7b6122;
+      text-transform: uppercase;
+      letter-spacing: .7px;
+    }
+
+    .location-card {
+      text-align: center;
+    }
+
+    .location-card .place {
+      font-size: clamp(1.4rem, 3vw, 1.9rem);
+      font-weight: 700;
+      color: #a0710f;
+    }
+
+    .location-card .address {
+      margin-top: 10px;
+      font-size: clamp(1rem, 2vw, 1.18rem);
+    }
+
+    .footer {
+      text-align: center;
+      padding: 18px 0 8px;
+      color: #8d7640;
+      font-size: .98rem;
+    }
+
+    .btn-top {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      width: 52px;
+      height: 52px;
+      border: none;
+      border-radius: 50%;
+      background: linear-gradient(180deg, #f7e4a4, #cc9e2c);
+      color: #5b420e;
+      font-size: 1.25rem;
+      box-shadow: 0 12px 24px rgba(120, 84, 12, 0.2);
+      cursor: pointer;
+      z-index: 10;
+      opacity: 0;
+      transform: translateY(12px);
+      pointer-events: none;
+      transition: .25s ease;
+    }
+
+    .btn-top.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    @media (max-width: 860px) {
+      .quick-info,
+      .cards,
+      .countdown {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 18px;
+      }
+
+      .hero-card {
+        padding: 22px 16px;
+      }
+
+      body {
+        cursor: auto;
+      }
+
+      .cursor,
+      .cursor-ring {
+        display: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        width: min(100% - 18px, 1100px);
+      }
+
+      .card,
+      .countdown-wrap,
+      .pill {
+        border-radius: 22px;
+      }
+
+      .name-tag {
+        font-size: 1.05rem;
+      }
+
+      .subtitle {
+        font-size: .98rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="cursor"></div>
+  <div class="cursor-ring"></div>
+
+  <div class="bg-cloud cloud1"></div>
+  <div class="bg-cloud cloud2"></div>
+  <div class="bg-cloud cloud3"></div>
+  <div class="bg-orb orb1"></div>
+  <div class="bg-orb orb2"></div>
+
+  <main class="container">
+    <section class="hero">
+      <div class="hero-card interactive">
+        <div class="hero-inner">
+          <div class="ribbon">Mi Bautizo y 3 Años</div>
+          <div class="angel">👼🎂☁️</div>
+          <h1 class="title">ETHAN</h1>
+          <p class="subtitle">
+            Con mucha alegría te invitamos a celebrar este momento tan especial.
+            Acompáñanos a compartir un día lleno de amor, bendiciones, alegría y mucha ternura para celebrar su bautizo y sus 3 años.
+          </p>
+
+          <div class="quick-info">
+            <div class="pill interactive">
+              <span class="label">Evento</span>
+              <strong>Bautizo de Ethan</strong>
+            </div>
+            <div class="pill interactive">
+              <span class="label">Recepción</span>
+              <strong>3:30 PM</strong>
+            </div>
+            <div class="pill interactive">
+              <span class="label">Lugar</span>
+              <strong>Salón Jardín “Los Pinos”</strong>
+            </div>
+          </div>
+
+          <div class="countdown-wrap interactive">
+            <h2 class="countdown-title">Cuenta regresiva</h2>
+            <div class="countdown" id="countdown">
+              <div class="time-box"><span class="num" id="days">00</span><span class="txt">Días</span></div>
+              <div class="time-box"><span class="num" id="hours">00</span><span class="txt">Horas</span></div>
+              <div class="time-box"><span class="num" id="minutes">00</span><span class="txt">Minutos</span></div>
+              <div class="time-box"><span class="num" id="seconds">00</span><span class="txt">Segundos</span></div>
+            </div>
+            <p class="countdown-note" id="eventDateText"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      
+      <div class="cards">
+        <article class="card interactive reveal">
+          <h3>Oración</h3>
+          <p>
+            Gracias Dios Nuestro Señor por el don de vida. Hoy me presentan ante ti para ser bañado con la gracia de tu amor, toma mi pequeño corazón en tus manos benditas y jamás te separes de mí.
+          </p>
+        </article>
+
+        <article class="card interactive reveal">
+          <h3>Con mucho amor</h3>
+          <p>
+            Nací para la felicidad de mis papis, por eso soy el amor de mi mami y el tesoro de mi papi. Y junto a mis padrinos que me guiarán por el camino de luz, hemos pensado en ti para que nos acompañes en este gran día.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Con cariño</h2>
+      <div class="cards">
+        <article class="card interactive reveal">
+          <h3>Mis Padres</h3>
+          <div class="names">
+            <div class="name-tag interactive">Alan Martinez</div>
+            <div class="name-tag interactive">Laura Coyotl</div>
+          </div>
+        </article>
+
+        <article class="card interactive reveal">
+          <h3>Mis Padrinos</h3>
+          <div class="names">
+            <div class="name-tag interactive">Javier Martinez</div>
+            <div class="name-tag interactive">Yazmin Morales</div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Recepción</h2>
+      <div class="cards">
+        <article class="card location-card interactive reveal" style="grid-column: 1 / -1;">
+          <h3>Salón Jardín “Los Pinos”</h3>
+          <p class="place">3:30 PM</p>
+          <p class="address">124-B poniente #35, Fuentes de Aparicio</p>
+          <p style="margin-top: 14px;">
+            Será un gusto contar con tu presencia en este día tan importante para Ethan.
+          </p>
+          <a href="https://maps.app.goo.gl/e7bt62syBHKLNt3E6?g_st=aw" target="_blank" rel="noopener noreferrer" class="interactive" style="display:inline-block; margin-top:18px; text-decoration:none; border:none; padding:14px 24px; border-radius:999px; background:linear-gradient(180deg, #f7e4a4, #cc9e2c); color:#5b420e; font-size:1rem; font-weight:700; box-shadow:0 12px 24px rgba(120,84,12,0.18); transition:transform .2s ease, box-shadow .2s ease;">
+            Ubicación
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="card interactive reveal" style="text-align:center;">
+        <h3>Un día para recordar</h3>
+        <p>
+          Gracias por ser parte de nuestra historia y acompañarnos en esta celebración tan especial.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <div class="card interactive reveal" style="text-align:center;">
+        <h3>Confirma tu asistencia</h3>
+        <p style="margin-bottom: 16px;">
+          Nos dará mucha alegría saber que nos acompañarás en este día tan especial.
+        </p>
+        <button id="confirmBtn" class="interactive" style="border:none; padding:14px 24px; border-radius:999px; background:linear-gradient(180deg, #f7e4a4, #cc9e2c); color:#5b420e; font-size:1rem; font-weight:700; box-shadow:0 12px 24px rgba(120,84,12,0.18); cursor:pointer; transition:transform .2s ease, box-shadow .2s ease;">
+          Confirmo mi asistencia
+        </button>
+        <p id="confirmMessage" style="display:none; margin-top:16px; color:#8a6918; font-weight:700;">
+          Gracias por confirmar, te esperamos.
+        </p>
+      </div>
+    </section>
+
+    <div class="footer">
+      Hecho con amor para el bautizo de Ethan ✨
+    </div>
+  </main>
+
+  <button class="btn-top" id="btnTop" aria-label="Volver arriba">↑</button>
+
+  <script>
+    // Cambia esta fecha por la real del evento.
+    // Formato recomendado: AAAA-MM-DDTHH:MM:SS
+    const eventDate = new Date("2026-04-20T15:30:00");
+
+    const daysEl = document.getElementById("days");
+    const hoursEl = document.getElementById("hours");
+    const minutesEl = document.getElementById("minutes");
+    const secondsEl = document.getElementById("seconds");
+    const eventDateText = document.getElementById("eventDateText");
+
+    const options = {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+      minute: "2-digit"
+    };
+
+    eventDateText.textContent = `Fecha configurada del evento: ${eventDate.toLocaleString("es-MX", options)}`;
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = eventDate - now;
+
+      if (diff <= 0) {
+        daysEl.textContent = "00";
+        hoursEl.textContent = "00";
+        minutesEl.textContent = "00";
+        secondsEl.textContent = "00";
+        eventDateText.textContent = "¡El gran día ha llegado!";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / 1000 / 60) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      daysEl.textContent = String(days).padStart(2, "0");
+      hoursEl.textContent = String(hours).padStart(2, "0");
+      minutesEl.textContent = String(minutes).padStart(2, "0");
+      secondsEl.textContent = String(seconds).padStart(2, "0");
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    const revealCards = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    revealCards.forEach(card => observer.observe(card));
+
+    const cursor = document.querySelector('.cursor');
+    const ring = document.querySelector('.cursor-ring');
+    const interactive = document.querySelectorAll('.interactive');
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let ringX = mouseX;
+    let ringY = mouseY;
+    let sparkleCooldown = 0;
+
+    function animateRing() {
+      ringX += (mouseX - ringX) * 0.18;
+      ringY += (mouseY - ringY) * 0.18;
+      ring.style.left = ringX + 'px';
+      ring.style.top = ringY + 'px';
+      requestAnimationFrame(animateRing);
+    }
+    animateRing();
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+
+      if (window.innerWidth > 860) {
+        sparkleCooldown++;
+        if (sparkleCooldown % 4 === 0) {
+          const spark = document.createElement('span');
+          spark.className = 'sparkle';
+          spark.style.left = (e.clientX + (Math.random() * 18 - 9)) + 'px';
+          spark.style.top = (e.clientY + (Math.random() * 18 - 9)) + 'px';
+          document.body.appendChild(spark);
+          setTimeout(() => spark.remove(), 700);
+        }
+      }
+    });
+
+    interactive.forEach(el => {
+      el.addEventListener('mouseenter', () => ring.classList.add('cursor-grow'));
+      el.addEventListener('mouseleave', () => ring.classList.remove('cursor-grow'));
+    });
+
+    const btnTop = document.getElementById('btnTop');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 220) btnTop.classList.add('show');
+      else btnTop.classList.remove('show');
+    });
+
+    btnTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    const confirmBtn = document.getElementById('confirmBtn');
+    const confirmMessage = document.getElementById('confirmMessage');
+
+    confirmBtn.addEventListener('click', () => {
+      confirmMessage.style.display = 'block';
+      confirmBtn.textContent = 'Asistencia confirmada';
+      confirmBtn.disabled = true;
+      confirmBtn.style.opacity = '0.85';
+      confirmBtn.style.transform = 'scale(0.98)';
+    });
+  </script>
+</body>
+</html>
