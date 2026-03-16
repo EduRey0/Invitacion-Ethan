@@ -463,6 +463,114 @@
       pointer-events: auto;
     }
 
+    .modal-confirm {
+      position: fixed;
+      inset: 0;
+      background: rgba(62, 42, 12, 0.45);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      z-index: 10000;
+      backdrop-filter: blur(4px);
+    }
+
+    .modal-confirm.show {
+      display: flex;
+    }
+
+    .modal-box {
+      width: min(100%, 420px);
+      background: rgba(255,255,255,0.96);
+      border-radius: 24px;
+      box-shadow: 0 18px 45px rgba(88, 66, 20, 0.2);
+      padding: 24px 20px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.85);
+    }
+
+    .modal-box h3 {
+      margin: 0 0 10px;
+      color: var(--gold-dark);
+      font-size: 1.8rem;
+    }
+
+    .modal-box p {
+      margin: 0 0 16px;
+      color: #7b6122;
+      line-height: 1.6;
+    }
+
+    .modal-input {
+      width: 100%;
+      padding: 13px 14px;
+      margin-bottom: 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(186,220,247,.95);
+      background: rgba(255,255,255,0.95);
+      outline: none;
+      font-size: 1rem;
+      color: #5f4a1b;
+    }
+
+    .modal-input:focus {
+      border-color: #d0a03a;
+      box-shadow: 0 0 0 4px rgba(208,160,58,0.12);
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+
+    .btn-gold,
+    .btn-green,
+    .btn-link {
+      border: none;
+      padding: 13px 20px;
+      border-radius: 999px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: transform .2s ease, opacity .2s ease, box-shadow .2s ease;
+    }
+
+    .btn-gold {
+      background: linear-gradient(180deg, #f7e4a4, #cc9e2c);
+      color: #5b420e;
+      box-shadow: 0 12px 24px rgba(120,84,12,0.18);
+    }
+
+    .btn-green {
+      background: linear-gradient(180deg, #46d96f, #21a851);
+      color: white;
+      box-shadow: 0 12px 24px rgba(33,168,81,0.18);
+    }
+
+    .btn-link {
+      background: transparent;
+      color: #9f7412;
+      padding: 10px 12px;
+    }
+
+    .btn-gold:hover,
+    .btn-green:hover,
+    .btn-link:hover {
+      transform: translateY(-2px);
+    }
+
+    .input-error {
+      font-size: .92rem;
+      color: #b04f4f;
+      margin-top: 8px;
+      display: none;
+    }
+
     @media (max-width: 860px) {
       .quick-info,
       .cards,
@@ -496,7 +604,8 @@
 
       .card,
       .countdown-wrap,
-      .pill {
+      .pill,
+      .modal-box {
         border-radius: 22px;
       }
 
@@ -532,21 +641,33 @@
             Acompáñanos a compartir un día lleno de amor, bendiciones, alegría y mucha ternura para celebrar su bautizo y sus 3 años.
           </p>
 
-          <div class="quick-info">
+         <div class="quick-info">
             <div class="pill interactive">
-              <span class="label">Evento</span>
-              <strong>Bautizo de Ethan</strong>
+                <span class="label">Evento</span>
+                <strong>Celebración de misa</strong>
             </div>
             <div class="pill interactive">
-              <span class="label">Recepción</span>
-              <strong>3:30 PM</strong>
+                <span class="label">Recepción</span>
+                <strong>2:00 PM</strong>
             </div>
             <div class="pill interactive">
-              <span class="label">Lugar</span>
-              <strong>Salón Jardín “Los Pinos”</strong>
+                <span class="label">Lugar</span>
+                <strong>Parroquia Virgen de Juquila</strong>
             </div>
-          </div>
 
+            <div class="pill interactive">
+                <span class="label">Evento</span>
+                <strong>Celebración del Bautizo</strong>
+            </div>
+            <div class="pill interactive">
+                <span class="label">Recepción</span>
+                <strong>3:00 PM</strong>
+            </div>
+            <div class="pill interactive">
+                <span class="label">Lugar</span>
+                <strong>Salón Jardín “Los Pinos”</strong>
+            </div>
+        </div>
           <div class="countdown-wrap interactive">
             <h2 class="countdown-title">Cuenta regresiva</h2>
             <div class="countdown" id="countdown">
@@ -562,7 +683,6 @@
     </section>
 
     <section>
-      
       <div class="cards">
         <article class="card interactive reveal">
           <h3>Oración</h3>
@@ -586,32 +706,48 @@
         <article class="card interactive reveal">
           <h3>Mis Padres</h3>
           <div class="names">
-            <div class="name-tag interactive">Alan Martinez</div>
-            <div class="name-tag interactive">Laura Coyotl</div>
+            <div class="name-tag interactive">Alan Martinez Rojas</div>
+            <div class="name-tag interactive">Laura Coyotl Diaz</div>
           </div>
         </article>
 
         <article class="card interactive reveal">
           <h3>Mis Padrinos</h3>
           <div class="names">
-            <div class="name-tag interactive">Javier Martinez</div>
-            <div class="name-tag interactive">Yazmin Morales</div>
+            <div class="name-tag interactive">Javier Martinez Rojas</div>
+            <div class="name-tag interactive">Yazmin Morales Nolasco</div>
           </div>
         </article>
       </div>
     </section>
 
     <section>
-      <h2 class="section-title">Recepción</h2>
+      <h2 class="section-title">Misa</h2>
+      <div class="cards">
+        <article class="card location-card interactive reveal" style="grid-column: 1 / -1;">
+          <h3>Parroquia Nuestra Señora de Juquila</h3>
+          <p class="address">Calle Veracruz 72017, Col. México 83</p>
+          <p style="margin-top: 14px;">
+            Esperamos contar con su valiosa presencia en la celebración de la misa para compartir este momento tan especial.
+          </p>
+          <a href="https://maps.app.goo.gl/RUnqwSqqDQd57q5N9?g_st=aw" target="_blank" rel="noopener noreferrer" class="interactive btn-gold" style="margin-top:18px;">
+            Ubicación
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Celebración</h2>
       <div class="cards">
         <article class="card location-card interactive reveal" style="grid-column: 1 / -1;">
           <h3>Salón Jardín “Los Pinos”</h3>
           <p class="place">3:30 PM</p>
-          <p class="address">124-B poniente #35, Fuentes de Aparicio</p>
+          <p class="address">124 poniente #219, Fuentes de Aparicio</p>
           <p style="margin-top: 14px;">
             Será un gusto contar con tu presencia en este día tan importante para Ethan.
           </p>
-          <a href="https://maps.app.goo.gl/e7bt62syBHKLNt3E6?g_st=aw" target="_blank" rel="noopener noreferrer" class="interactive" style="display:inline-block; margin-top:18px; text-decoration:none; border:none; padding:14px 24px; border-radius:999px; background:linear-gradient(180deg, #f7e4a4, #cc9e2c); color:#5b420e; font-size:1rem; font-weight:700; box-shadow:0 12px 24px rgba(120,84,12,0.18); transition:transform .2s ease, box-shadow .2s ease;">
+          <a href="https://maps.app.goo.gl/BhdbVavPv6dBYy7t9?g_st=aw" target="_blank" rel="noopener noreferrer" class="interactive btn-gold" style="margin-top:18px;">
             Ubicación
           </a>
         </article>
@@ -633,7 +769,7 @@
         <p style="margin-bottom: 16px;">
           Nos dará mucha alegría saber que nos acompañarás en este día tan especial.
         </p>
-        <button id="confirmBtn" class="interactive" style="border:none; padding:14px 24px; border-radius:999px; background:linear-gradient(180deg, #f7e4a4, #cc9e2c); color:#5b420e; font-size:1rem; font-weight:700; box-shadow:0 12px 24px rgba(120,84,12,0.18); cursor:pointer; transition:transform .2s ease, box-shadow .2s ease;">
+        <button id="confirmBtn" class="interactive btn-gold" type="button">
           Confirmo mi asistencia
         </button>
         <p id="confirmMessage" style="display:none; margin-top:16px; color:#8a6918; font-weight:700;">
@@ -649,10 +785,42 @@
 
   <button class="btn-top" id="btnTop" aria-label="Volver arriba">↑</button>
 
+  <div class="modal-confirm" id="confirmModal">
+    <div class="modal-box interactive">
+      <h3>Confirmar asistencia</h3>
+      <p>Escribe tus datos para enviarlos por WhatsApp.</p>
+
+      <input
+        type="text"
+        id="familia"
+        class="modal-input"
+        placeholder="Familia: Ej. Reyes Martinez"
+      >
+
+      <input
+        type="number"
+        id="personas"
+        class="modal-input"
+        placeholder="Asistentes: Ej. 2"
+        min="1"
+      >
+
+      <div class="modal-actions">
+        <button class="btn-green interactive" type="button" id="sendWhatsappBtn">
+          Enviar por WhatsApp
+        </button>
+        <button class="btn-link interactive" type="button" id="closeModalBtn">
+          Cancelar
+        </button>
+      </div>
+
+      <p class="input-error" id="modalError">Por favor completa ambos campos.</p>
+    </div>
+  </div>
+
   <script>
-    // Cambia esta fecha por la real del evento.
-    // Formato recomendado: AAAA-MM-DDTHH:MM:SS
-    const eventDate = new Date("2026-04-20T15:30:00");
+    const eventDate = new Date("2026-05-23T15:30:00");
+    const phoneNumber = "5217295963023";
 
     const daysEl = document.getElementById("days");
     const hoursEl = document.getElementById("hours");
@@ -698,20 +866,20 @@
     updateCountdown();
     setInterval(updateCountdown, 1000);
 
-    const revealCards = document.querySelectorAll('.reveal');
+    const revealCards = document.querySelectorAll(".reveal");
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('show');
+          entry.target.classList.add("show");
         }
       });
     }, { threshold: 0.15 });
 
     revealCards.forEach(card => observer.observe(card));
 
-    const cursor = document.querySelector('.cursor');
-    const ring = document.querySelector('.cursor-ring');
-    const interactive = document.querySelectorAll('.interactive');
+    const cursor = document.querySelector(".cursor");
+    const ring = document.querySelector(".cursor-ring");
+    const interactive = document.querySelectorAll(".interactive");
     let mouseX = window.innerWidth / 2;
     let mouseY = window.innerHeight / 2;
     let ringX = mouseX;
@@ -721,25 +889,25 @@
     function animateRing() {
       ringX += (mouseX - ringX) * 0.18;
       ringY += (mouseY - ringY) * 0.18;
-      ring.style.left = ringX + 'px';
-      ring.style.top = ringY + 'px';
+      ring.style.left = ringX + "px";
+      ring.style.top = ringY + "px";
       requestAnimationFrame(animateRing);
     }
     animateRing();
 
-    window.addEventListener('mousemove', (e) => {
+    window.addEventListener("mousemove", (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
-      cursor.style.left = e.clientX + 'px';
-      cursor.style.top = e.clientY + 'px';
+      cursor.style.left = e.clientX + "px";
+      cursor.style.top = e.clientY + "px";
 
       if (window.innerWidth > 860) {
         sparkleCooldown++;
         if (sparkleCooldown % 4 === 0) {
-          const spark = document.createElement('span');
-          spark.className = 'sparkle';
-          spark.style.left = (e.clientX + (Math.random() * 18 - 9)) + 'px';
-          spark.style.top = (e.clientY + (Math.random() * 18 - 9)) + 'px';
+          const spark = document.createElement("span");
+          spark.className = "sparkle";
+          spark.style.left = (e.clientX + (Math.random() * 18 - 9)) + "px";
+          spark.style.top = (e.clientY + (Math.random() * 18 - 9)) + "px";
           document.body.appendChild(spark);
           setTimeout(() => spark.remove(), 700);
         }
@@ -747,29 +915,65 @@
     });
 
     interactive.forEach(el => {
-      el.addEventListener('mouseenter', () => ring.classList.add('cursor-grow'));
-      el.addEventListener('mouseleave', () => ring.classList.remove('cursor-grow'));
+      el.addEventListener("mouseenter", () => ring.classList.add("cursor-grow"));
+      el.addEventListener("mouseleave", () => ring.classList.remove("cursor-grow"));
     });
 
-    const btnTop = document.getElementById('btnTop');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 220) btnTop.classList.add('show');
-      else btnTop.classList.remove('show');
+    const btnTop = document.getElementById("btnTop");
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 220) btnTop.classList.add("show");
+      else btnTop.classList.remove("show");
     });
 
-    btnTop.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    btnTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
-    const confirmBtn = document.getElementById('confirmBtn');
-    const confirmMessage = document.getElementById('confirmMessage');
+    const confirmBtn = document.getElementById("confirmBtn");
+    const confirmMessage = document.getElementById("confirmMessage");
+    const confirmModal = document.getElementById("confirmModal");
+    const closeModalBtn = document.getElementById("closeModalBtn");
+    const sendWhatsappBtn = document.getElementById("sendWhatsappBtn");
+    const familiaInput = document.getElementById("familia");
+    const personasInput = document.getElementById("personas");
+    const modalError = document.getElementById("modalError");
 
-    confirmBtn.addEventListener('click', () => {
-      confirmMessage.style.display = 'block';
-      confirmBtn.textContent = 'Asistencia confirmada';
-      confirmBtn.disabled = true;
-      confirmBtn.style.opacity = '0.85';
-      confirmBtn.style.transform = 'scale(0.98)';
+    confirmBtn.addEventListener("click", () => {
+      confirmModal.classList.add("show");
+      modalError.style.display = "none";
+      familiaInput.value = "";
+      personasInput.value = "";
+      familiaInput.focus();
+    });
+
+    closeModalBtn.addEventListener("click", () => {
+      confirmModal.classList.remove("show");
+    });
+
+    confirmModal.addEventListener("click", (e) => {
+      if (e.target === confirmModal) {
+        confirmModal.classList.remove("show");
+      }
+    });
+
+    sendWhatsappBtn.addEventListener("click", () => {
+      const familia = familiaInput.value.trim();
+      const personas = personasInput.value.trim();
+
+      if (!familia || !personas) {
+        modalError.style.display = "block";
+        return;
+      }
+
+      modalError.style.display = "none";
+
+      const mensaje = `Hola, somos la familia ${familia}, asistiremos ${personas} personas y confirmamos nuestra asistencia al bautizo y cumpleaños de Ethan.`;
+      const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(mensaje)}`;
+
+      confirmMessage.style.display = "block";
+      confirmModal.classList.remove("show");
+
+      window.open(url, "_blank");
     });
   </script>
 </body>
